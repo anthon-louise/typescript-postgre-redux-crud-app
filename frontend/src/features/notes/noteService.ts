@@ -7,3 +7,8 @@ export const createNoteAPI = async (
     const res = await api.post('/notes', data)
     return res.data
 }
+
+export const fetchNotesAPI = async () => {
+    const res = await api.get('/notes')
+    return res.data
+}

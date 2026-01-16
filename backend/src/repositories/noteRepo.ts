@@ -1,3 +1,4 @@
+import { isJSDocReturnTag } from "typescript"
 import { db } from "../config/db.js"
 
 export const createNoteRepo = async (title: string, content: string) => {
@@ -8,4 +9,13 @@ export const createNoteRepo = async (title: string, content: string) => {
         RETURNING *
         `, [title, content])
     return rows[0]
+}
+
+export const getNotesRepo = async () => {
+    const {rows} = await db.query(`
+        SELECT *
+        FROM notes
+        ORDER BY id DESC
+        `)
+    return rows
 }

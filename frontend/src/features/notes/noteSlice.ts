@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import { createNoteAPI } from './noteService'
+import { createNoteAPI, fetchNotesAPI } from './noteService'
 import type { Note } from './noteType'
 
 interface NoteState {
@@ -13,6 +13,7 @@ const initialState: NoteState = {
 }
 
 export const addNote = createAsyncThunk('notes/add', createNoteAPI)
+export const getNotes = createAsyncThunk('notes/get', fetchNotesAPI)
 
 const noteSlice = createSlice({
     name: 'notes',
@@ -22,6 +23,9 @@ const noteSlice = createSlice({
         builder
             .addCase(addNote.fulfilled, (state, action) => {
                 state.list.unshift(action.payload)
+            })
+            .addCase(getNotes.fulfilled, (state, action) => {
+                state.list = action.payload
             })
     }
 })

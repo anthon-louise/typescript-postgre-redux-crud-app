@@ -13,6 +13,8 @@ const NoteForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         dispatch(addNote({title, content}))
+        setTitle("")
+        setContent("")
         notify.success("note created")
     }
 

@@ -13,3 +13,13 @@ export const deleteNote = async (id: number) => {
     const deleted = repo.deleteNotesRepo(id)
     if (!deleted) throw new AppError("Note not found", 404)
 }
+
+export const updateNote = async (
+    id: number,
+    title: string,
+    content: string
+) => {
+    const note = await repo.updateNoteRepo(id, title, content)
+    if (!note) throw new AppError("Note not found", 404)
+    return note
+}

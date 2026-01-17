@@ -28,3 +28,17 @@ export const deleteNotesRepo = async (id: number) => {
         `, [id])
     return result.rowCount
 }
+
+export const updateNoteRepo = async (
+    id: number,
+    title: string,
+    content: string
+) => {
+    const {rows} = await db.query(`
+        UPDATE notes
+        SET title=$1, content=$2
+        WHERE id=$3
+        RETURNING *
+        `, [title, content, id])
+    return rows[0]
+}

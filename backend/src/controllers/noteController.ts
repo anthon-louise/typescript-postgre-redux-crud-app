@@ -17,3 +17,13 @@ export const removeNote = async (req: Request, res: Response) => {
     await service.deleteNote(Number(req.params.id))
     res.json({message: 'Note deleted successfully'})
 }
+
+export const editNote = async (req: Request, res: Response) => {
+    const data = noteSchema.parse(req.body)
+    const note = await service.updateNote(
+        Number(req.params.id),
+        data.title,
+        data.content
+    )
+    res.json(note)
+}

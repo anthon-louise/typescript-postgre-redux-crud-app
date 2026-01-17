@@ -12,3 +12,8 @@ export const fetchNotesAPI = async () => {
     const res = await api.get('/notes')
     return res.data
 }
+
+export const deleteNoteAPI = async (id: number) => {
+    await api.delete(`/notes/${id}`)
+    return id
+}

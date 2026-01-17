@@ -1,11 +1,14 @@
 import type { Note } from "../features/notes/noteType"
+import Button from "./Button"
 
 interface Props {
-    notes: Note[]
+    notes: Note[],
+    onDelete: (id: number) => void
 }
 
 export const NoteList = ({
- notes
+ notes,
+ onDelete
 }: Props) => {
     if (!notes.length) return <p>No notes yet</p>
 
@@ -15,6 +18,7 @@ export const NoteList = ({
                 notes.map((note) => (
                     <li key={note.id}>
                         {note.title} - {note.content}
+                        <Button text="🗑️" onClick={() => onDelete(note.id)}/>
                     </li>
                 ))
             }

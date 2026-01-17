@@ -8,3 +8,8 @@ export const createNote = async (title: string, content: string) => {
 export const getNotes  = async () => {
     return repo.getNotesRepo()
 }
+
+export const deleteNote = async (id: number) => {
+    const deleted = repo.deleteNotesRepo(id)
+    if (!deleted) throw new AppError("Note not found", 404)
+}

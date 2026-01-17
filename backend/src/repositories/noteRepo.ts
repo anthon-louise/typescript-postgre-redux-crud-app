@@ -19,3 +19,12 @@ export const getNotesRepo = async () => {
         `)
     return rows
 }
+
+export const deleteNotesRepo = async (id: number) => {
+    const result = await db.query(`
+        DELETE
+        FROM notes
+        WHERE id=$1
+        `, [id])
+    return result.rowCount
+}

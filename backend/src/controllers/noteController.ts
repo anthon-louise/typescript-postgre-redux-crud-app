@@ -12,3 +12,8 @@ export const getAllNotes = async (_: Request, res: Response) => {
     const notes = await service.getNotes()
     res.json(notes)
 }
+
+export const removeNote = async (req: Request, res: Response) => {
+    await service.deleteNote(Number(req.params.id))
+    res.json({message: 'Note deleted successfully'})
+}

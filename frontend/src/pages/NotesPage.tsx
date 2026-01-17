@@ -1,7 +1,7 @@
 import NoteForm from "../components/NoteForm"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getNotes, removeNote } from "../features/notes/noteSlice"
+import { editNote, getNotes, removeNote } from "../features/notes/noteSlice"
 import type { RootState } from "../app/store"
 import NoteList from "../components/NoteList"
 import { useNotify } from "../hooks/useNotify"
@@ -14,6 +14,11 @@ const NotesPage = () => {
     const handleDelete = (id: number) => {
         dispatch(removeNote(id))
         notify.success("Deleted success")
+    }
+    
+    const handleEdit = (id: number, title: string, content: string) => {
+        dispatch(editNote({id, content, title}))
+        notify.success("Update success")
     }
 
     useEffect(() => {
@@ -28,6 +33,7 @@ const NotesPage = () => {
             <NoteList 
                 notes={notes}
                 onDelete={handleDelete}
+                onEdit={handleEdit}
                 />
         </div>
     )

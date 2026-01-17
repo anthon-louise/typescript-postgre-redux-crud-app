@@ -17,3 +17,16 @@ export const deleteNoteAPI = async (id: number) => {
     await api.delete(`/notes/${id}`)
     return id
 }
+
+export const updateNoteAPI = async ({
+    id,
+    title,
+    content
+} : {
+    id: number,
+    title: string,
+    content: string
+}):Promise<Note> => {
+    const res = await api.put(`/notes/${id}`, {title, content})
+    return res.data
+}
